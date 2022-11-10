@@ -6,7 +6,7 @@ import Logo from "../public/logo.png";
 import Layout from "../components/layout/Layout";
 
 import style from "../public/style.png";
-import K from "../public/k.png";
+import king from "../public/Kha.png";
 import g from "../public/R.png";
 import s from "../public/S.png";
 import b from "../public/B.png";
@@ -144,7 +144,7 @@ const about = () => {
               <ProfileCard
                 name="Khadijah Arowosegbe"
                 role="UI/UX Designer"
-                img={K}
+                img={king}
                 url={"https://www.linkedin.com/in/khadijaharowosegbe/"}
               />
               <ProfileCard
