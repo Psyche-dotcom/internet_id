@@ -5,7 +5,7 @@ import NavItem from "./NavItem";
 import { navData } from "../../dummyData/data";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../public/internetID.png";
+import logo from "../../public/logo.png";
 import MobileNavItem from "./mobileNavItem";
 const Layout = ({ children }) => {
   const [menuMobile, setmenuMobile] = useState(false);

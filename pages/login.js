@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import CustomButton from "../components/simpleComponent/Button";
 import Field from "../components/simpleComponent/Field";
-import logo from "../public/internetID.png";
+import Logo from "../public/logo.png";
 
 const Login = () => {
   const [internetId, setinternetId] = useState("");
@@ -29,7 +29,7 @@ const Login = () => {
           <ArrowBackIosNew className="hidden lg:block" />
           <Link href="/">
             <Image
-              src={logo}
+              src={Logo}
               className="logo lg:hidden self-start"
               alt="logo"
             />
@@ -77,7 +77,7 @@ const Login = () => {
       </section>
       <section className="hidden lg:block flex-1 py-10 h-screen  w-11/12 mx-auto lg:px-10 lg:py-5 bg-deepBlue ">
         <div className="w-4/5 mx-auto ">
-          <Image src={logo} className="logo" alt="logo" />
+          <Image src={Logo} className="logo" alt="logo" />
           <div className="lg:mt-40 xl:mt-48 2xl:mt-56">
             <h1 className=" text-white lg:text-5xl lg:leading-normal xl:text-6xl  xl:leading-snug font-bold">
               Access your dashboard & verify an identity using Internet ID

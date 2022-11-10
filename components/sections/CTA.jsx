@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Phone from "../../public/Phone.png";
+import Phone from "../../public/phone.png";
 
 const CTA = () => {
   return (

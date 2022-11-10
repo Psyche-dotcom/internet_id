@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import HeroImage from "../public/teamHero.png";
-import Logo from "../public/InternetID.png";
+import Logo from "../public/logo.png";
 import Layout from "../components/layout/Layout";
 
 import style from "../public/style.png";
-import k from "../public/k.png";
+import K from "../public/k.png";
 import g from "../public/R.png";
 import s from "../public/S.png";
 import b from "../public/B.png";
@@ -144,7 +144,7 @@ const about = () => {
               <ProfileCard
                 name="Khadijah Arowosegbe"
                 role="UI/UX Designer"
-                img={k}
+                img={K}
                 url={"https://www.linkedin.com/in/khadijaharowosegbe/"}
               />
               <ProfileCard
