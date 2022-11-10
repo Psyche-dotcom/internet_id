@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@600&display=swap");
+
+.customBtN {
+  position: relative;
+  z-index: 0;
+}
+
+.customBtN::before {
+  content: "";
+  width: 100%;
+  position: absolute;
+  height: 100%;
+
+  z-index: -1;
+  top: 9px;
+  left: -9px;
+  transition-duration: 1s;
+}
+.CardNew {
+  position: relative;
+  z-index: 0;
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+  margin-left: 800px;
+  margin-bottom: 60px;
+}
+.CardNew::before {
+  content: "";
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  background-color: white;
+  z-index: -100;
+  top: 9px;
+  left: -9px;
+  transition-duration: 1s;
+}
+.customBtN:hover.customBtN::before {
+  background-color: transparent;
+}
+
+.customCard {
+  /* max-width: 450px;
+  max-height: 450px; */
+  min-height: 350px;
+  min-width: 350px;
+  width: 100%;
+  height: 100%;
+  background-color: #a8d0db;
+  background-image: url("../public/frame.png"), url("../public/frame.png");
+  background-repeat: no-repeat;
+  background-position: 50% 40px, 50% 290px;
+  position: relative;
+  z-index: 0;
+}
+/* .customCard::before {
+  content: "";
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  background-color: #7180ac;
+  z-index: -1;
+  top: 9px;
+  left: -9px;
+  transition-duration: 1s;
+} */
+/* .customCard:hover.customCard::before {
+  background-color: transparent;
+} */
+.customBtNew {
+  position: relative;
+  z-index: 0;
+}
+.customBtNewe {
+  position: relative;
+  z-index: 0;
+}
+
+.customBtNew::before {
+  content: "";
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  background-color: white;
+  z-index: -1;
+  top: 9px;
+  left: -9px;
+  transition-duration: 1s;
+}
+.customBtNewe::before {
+  content: "";
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  background-color: #a8d0db;
+  z-index: -1;
+  top: 9px;
+  left: -9px;
+  transition-duration: 1s;
+}
+.customBtNew:hover.customBtNew::before {
+  background-color: transparent;
+}
+.customBtNewe:hover.customBtNewe::before {
+  background-color: transparent;
+}
+.customBtNL {
+  position: relative;
+  z-index: 0;
+}
+.customBtNLe {
+  position: relative;
+  z-index: 0;
+  display: inline;
+  min-height: 350px;
+  min-width: 350px;
+  background-image: url("../public/frame.png"), url("../public/frame.png");
+  background-repeat: no-repeat;
+  background-position: 50% 40px, 50% 290px;
+}
+.customBtNL::before {
+  content: "";
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  border: 1px solid white;
+  z-index: -1;
+  top: 9px;
+  left: -9px;
+  transition-duration: 1s;
+}
+.customBtNLe::before {
+  content: "";
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  background-color: white;
+  z-index: -1;
+  top: 9px;
+  left: -9px;
+  transition-duration: 1s;
+}
+.customBtNL:hover.customBtNL::before {
+  border: none;
+}
+.customBtNLe:hover.customBtNLe::before {
+  background-color: transparent;
+}
+
+.customPoint::after {
+  bottom: -10px;
+  right: 0;
+  width: 0;
+  transition-duration: 1s;
+}
+.customPoint:hover.customPoint::after {
+  width: 100%;
+}
+.heroBg {
+  background-image: url("../public/heroBg.png");
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+.CTA {
+  background-image: url("../public/Frame2.png");
+  background-repeat: no-repeat;
+  background-position: 50% 50px;
+}
+.Verify {
+  background-image: url("../public/dotted.png"), url("../public/dotted.png"),
+    url("../public/dotted.png"), url("../public/dotted.png");
+  background-repeat: no-repeat;
+  background-position: right 50px, right 100px, left 150px, left 200px;
+}
+.Newsletters {
+  background-image: url("../public/dotted.png"), url("../public/dotted.png");
+  background-repeat: no-repeat;
+  background-position: right 40%, right 60%;
+}
+.adminBg {
+  background-image: url("../public/adminb.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+  max-width: 855px;
+  min-width: 700px;
+  max-height: 631px;
+}
+.smallFram {
+  background-image: url("../public/smallFrame.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 800px) {
+  .logo {
+    width: unset;
+  }
+  .hambur {
+    font-size: 1.5rem;
+  }
+}
