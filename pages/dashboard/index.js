@@ -33,9 +33,6 @@ const index = () => {
   //     } )
   //     .catch()
   // }
-  useEffect(() => {
-    fetch_user_data();
-  }, []);
 
   return (
     <main className="lg:flex h-screen w-screen overflow-hidden">
