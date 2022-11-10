@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import idIcon from "../../public/idn.png";
 import chat from "../../public/chat.png";
 import keys from "../../public/key.png";
@@ -8,12 +8,13 @@ import logo from "../../public/dnd.png";
 import copy from "../../public/copy.png";
 
 const documentation = () => {
+  const [username, setusername] = useState("Gideon");
   return (
     <main className="lg:flex h-screen w-screen overflow-hidden">
       <section className="w-1/4 px-10 py-10 bg-cardBg">
         <div className=" flex flex-col justify-between h-full">
           <div>
-            <p className="text-center text-deepBlue">My Dashboard</p>
+            <p className="text-center text-deepBlue">Log Out</p>
             <div className="flex flex-col gap-4  mt-28">
               <Link href="/dashboard">
                 <div className="flex gap-4  px-3 py-3 rounded">
@@ -46,7 +47,7 @@ const documentation = () => {
       </section>
       <section className="w-3/4 px-20 py-20 bg-deepBlue">
         <h2 className="text-center text-whiteTran text-3xl lg:text-6xl mb-8">
-          Welcome Khadijah
+          {username}
         </h2>
         <div className="adminBg mx-auto flex justify-center items-center">
           <div className="flex flex-col gap-8 items-center">

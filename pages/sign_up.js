@@ -1,5 +1,6 @@
 import { ArrowBackIosNew } from "@mui/icons-material";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import React, { useState } from "react";
 import CustomButton from "../components/simpleComponent/Button";
@@ -8,6 +9,7 @@ import Logo from "../public/logo.png";
 import axios from "axios";
 
 const Sign_up = () => {
+  const router = useRouter();
   const [client, setclient] = useState(true);
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
@@ -68,10 +70,14 @@ const Sign_up = () => {
         is_dev: client ? true : false,
       });
       console.log(resp.data);
+      if (resp.data) {
+        router.push("/login");
+      }
     } catch (error) {
       console.log(error.response.data);
     }
   };
+
   return (
     <main className="lg:flex bg-signBg ">
       <section className="flex-1 py-10 h-screen  w-11/12 mx-auto lg:px-10 lg:py-5 bg-signBg">
@@ -185,13 +191,13 @@ const Sign_up = () => {
                   <Field
                     id="BVN"
                     placeholder="Bank Verification Number"
-                    type="text"
+                    type="password"
                     setstate={(e) => setBVN(e)}
                     error="Invalid BVN"
                   />
                   <Field
                     id="NIN"
-                    placeholder="National Identification Number"
+                    placeholder="International Passport "
                     type="text"
                     setstate={(e) => setNIN(e)}
                     error="Invalid NIN"
@@ -290,7 +296,7 @@ const Sign_up = () => {
                   <Field
                     id="BVN"
                     placeholder="Bank Verification Number"
-                    type="text"
+                    type="password"
                     setstate={(e) => setBVND(e)}
                     error="Invalid BVN"
                   />
