@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 import idIcon from "../../../public/idn.png";
 import chat from "../../../public/chat.png";
 import keys from "../../../public/key.png";
@@ -11,23 +10,13 @@ import prod from "../../../public/plus.png";
 import axios from "axios";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useRouter } from "next/router";
-
+import useSWR from "swr";
 const product = () => {
-  const [details, setdetails] = useState("");
   const router = useRouter();
 
   const Url = "https://internetid.geebee.engineer/api/v1/users/me/";
   const log_out = "https://internetid.geebee.engineer/api/v1/auth/logout/";
-  const fetch_user = async () => {
-    try {
-      const user_detail = await axios.get(Url, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("user").slice(1, -1)}`,
-        },
-      });
-      setdetails(user_detail.data.data);
-    } catch (error) {}
-  };
+
   let value;
   const ISSERVER = typeof window === "undefined";
   if (!ISSERVER) {
@@ -51,9 +40,20 @@ const product = () => {
     }
   };
 
-  useEffect(() => fetch_user, []);
-  console.log(details);
+  const fetcher = async () => {
+    const Url = "https://internetid.geebee.engineer/api/v1/users/me/";
+    const response = await fetch(Url, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("user").slice(1, -1)}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  };
+  const { data, error } = useSWR("dashboard", fetcher);
 
+  if (error) return "an error occured";
+  if (!data) return "loading";
   return (
     <main className="lg:flex h-screen w-screen overflow-hidden">
       <section className="w-1/4 px-10 py-10 bg-cardBg menubar">
@@ -101,8 +101,8 @@ const product = () => {
                   </p>
                 </div>
               </Link>
-              {details.is_dev === "1" ||
-                (details.is_dev === 1 && (
+              {data.data.is_dev === "1" ||
+                (data.data.is_dev === 1 && (
                   <Link href="/dashboard/product">
                     <div className="flex gap-4 b px-3 py-3 bg-white items-center rounded">
                       <Image src={prod} alt="identity" />
@@ -117,12 +117,12 @@ const product = () => {
           <Image src={logo} alt="logo" className="self-center" />
         </div>
       </section>
-      <section className="w-3/4 px-20 py-20 bg-deepBlue">
+      <section className="w-3/4 px-20 py-20 bg-deepBlue ">
         <h2 className="text-center text-whiteTran text-3xl lg:text-6xl mb-8 capitalize">
-          Welcome {details.first_name}
+          Welcome {data.data.first_name}
         </h2>
         <div className="adminBg mx-auto flex justify-center items-center">
-          <div className="flex flex-col gap-8 items-center">
+          <div className="flex flex-col gap-8 items-center maxwidcon">
             <div className="flex flex-col gap-4 text-center w-2/3 ">
               <h3 className="text-3xl font-sans text-deepBlue">
                 <span className="text-button text-5xl leading-loose">
@@ -136,7 +136,7 @@ const product = () => {
                 your user with our unique internet id.
               </p>
             </div>
-            <div className="flex border justify-end w-2/3  border-bb rounded-lg">
+            <div className="flex border justify-end w-2/3  border-bb rounded-lg overflow-hidden">
               <span className="bg-white p-2 w-5/6">{value}</span>{" "}
               <CopyToClipboard text={value}>
                 <span className="bg-button p-2 w-1/6 flex items-center justify-center cursor-pointer">

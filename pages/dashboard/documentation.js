@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import useSWR from "swr";
 import idIcon from "../../public/idn.png";
 import chat from "../../public/chat.png";
 import keys from "../../public/key.png";
@@ -11,21 +11,24 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 const documentation = () => {
-  const [details, setdetails] = useState("");
+  const fetcher = async () => {
+    const Url = "https://internetid.geebee.engineer/api/v1/users/me/";
+    const response = await fetch(Url, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("user").slice(1, -1)}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  };
+  const { data, error } = useSWR("documentation", fetcher);
 
+  if (error) return "an error occured";
+  if (!data) return "loading";
   const router = useRouter();
   const Url = "https://internetid.geebee.engineer/api/v1/users/me/";
   const log_out = "https://internetid.geebee.engineer/api/v1/auth/logout/";
-  const fetch_user = async () => {
-    try {
-      const user_detail = await axios.get(Url, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("user").slice(1, -1)}`,
-        },
-      });
-      setdetails(user_detail.data.data);
-    } catch (error) {}
-  };
+
   const logout_user = async () => {
     console.log("click");
     try {
@@ -43,8 +46,6 @@ const documentation = () => {
     }
   };
 
-  useEffect(() => fetch_user, []);
-  console.log(details);
   return (
     <main className="lg:flex h-screen w-screen overflow-hidden">
       <section className="w-1/4 px-10 py-10 bg-cardBg menubar">
@@ -92,8 +93,8 @@ const documentation = () => {
                   </p>
                 </div>
               </Link>
-              {details.is_dev === "1" ||
-                (details.is_dev === 1 && (
+              {data.data.is_dev === "1" ||
+                (data.data.is_dev === 1 && (
                   <Link href="/dashboard/product">
                     <div className="flex gap-4 b px-3 py-3 items-center rounded">
                       <Image src={product} alt="identity" />
@@ -110,7 +111,7 @@ const documentation = () => {
       </section>
       <section className="w-3/4 px-20 py-20 bg-deepBlue">
         <h2 className="text-center text-whiteTran capitalize text-3xl lg:text-6xl mb-8">
-          Welcome {details.first_name}
+          Welcome {data.data.first_name}
         </h2>
         <div className="adminBg mx-auto flex justify-center items-center">
           <div className="flex flex-col gap-8 items-center">

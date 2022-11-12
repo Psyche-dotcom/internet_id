@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import idIcon from "../../../public/idn.png";
 import chat from "../../../public/chat.png";
 import keys from "../../../public/key.png";
@@ -10,9 +10,9 @@ import document from "../../../public/book.png";
 import prod from "../../../public/plus.png";
 import axios from "axios";
 import { useRouter } from "next/router";
+import useSWR from "swr";
 import Field from "../../../components/simpleComponent/Field";
 const product = () => {
-  const [details, setdetails] = useState("");
   const [company, setcompany] = useState("");
   const [business, setbusiness] = useState("");
   const [project, setproject] = useState("");
@@ -23,48 +23,6 @@ const product = () => {
   const product_url = "https://internetid.geebee.engineer/api/v1/products/";
   const Url = "https://internetid.geebee.engineer/api/v1/users/me/";
   const log_out = "https://internetid.geebee.engineer/api/v1/auth/logout/";
-  const fetch_user = async () => {
-    try {
-      const user_detail = await axios.get(Url, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("user").slice(1, -1)}`,
-        },
-      });
-      setdetails(user_detail.data.data);
-    } catch (error) {}
-  };
-  let localstore;
-  const ISSERVER = typeof window === "undefined";
-  if (!ISSERVER) {
-    localstore = localStorage.getItem("user").slice(1, -1);
-  }
-
-  const config = {
-    headers: { Authorization: `Bearer ${localstore}` },
-  };
-  const bodyParameters = {
-    business_type: business,
-    company_mail: email,
-    company_name: company,
-    project_description: project,
-    website_url: website,
-    private_key: details.private_key,
-  };
-
-  const create_product = async () => {
-    try {
-      const product = await axios.post(product_url, bodyParameters, config);
-      console.log(product.data.data.public_key);
-      localStorage.setItem(
-        "public_key",
-        JSON.stringify(product.data.data.public_key)
-      );
-      router.push("/dashboard/product/sucess");
-    } catch (error) {
-      console.error(error);
-    }
-    console.log(`Bearer ${localstore}`);
-  };
 
   const logout_user = async () => {
     console.log("click");
@@ -82,10 +40,51 @@ const product = () => {
       console.log(error);
     }
   };
+  const fetcher = async () => {
+    const Url = "https://internetid.geebee.engineer/api/v1/users/me/";
+    const response = await fetch(Url, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("user").slice(1, -1)}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  };
+  const { data, error } = useSWR("integration", fetcher);
 
-  useEffect(() => fetch_user, []);
-  console.log(details);
+  if (error) return "an error occured";
+  if (!data) return "loading data";
+  let localstore;
+  const ISSERVER = typeof window === "undefined";
+  if (!ISSERVER) {
+    localstore = localStorage.getItem("user").slice(1, -1);
+  }
 
+  const config = {
+    headers: { Authorization: `Bearer ${localstore}` },
+  };
+  const bodyParameters = {
+    business_type: business,
+    company_mail: email,
+    company_name: company,
+    project_description: project,
+    website_url: website,
+    private_key: data.data.private_key,
+  };
+  const create_product = async () => {
+    try {
+      const product = await axios.post(product_url, bodyParameters, config);
+      console.log(product.data.data.public_key);
+      localStorage.setItem(
+        "public_key",
+        JSON.stringify(product.data.data.public_key)
+      );
+      router.push("/dashboard/product/sucess");
+    } catch (error) {
+      console.error(error);
+    }
+    console.log(`Bearer ${localstore}`);
+  };
   return (
     <main className="lg:flex h-screen w-screen overflow-hidden">
       <section className="w-1/4 px-10 py-10 bg-cardBg menubar">
@@ -133,8 +132,8 @@ const product = () => {
                   </p>
                 </div>
               </Link>
-              {details.is_dev === "1" ||
-                (details.is_dev === 1 && (
+              {data.data.is_dev === "1" ||
+                (data.data.is_dev === 1 && (
                   <Link href="/dashboard/product">
                     <div className="flex gap-4 b px-3 py-3 bg-white items-center rounded">
                       <Image src={prod} alt="identity" />
@@ -151,7 +150,7 @@ const product = () => {
       </section>
       <section className="w-3/4 px-20 py-20 bg-deepBlue">
         <h2 className="text-center text-whiteTran text-3xl lg:text-6xl mb-8 capitalize">
-          Welcome {details.first_name}
+          Welcome {data.data.first_name}
         </h2>
         <div className="adminBg mx-auto flex justify-center items-center">
           <div className=" flex flex-col gap-8">

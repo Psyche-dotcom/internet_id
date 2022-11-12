@@ -193,6 +193,9 @@ html {
   min-width: 700px;
   max-height: 631px;
 }
+.maxwidcon {
+  max-width: 750px;
+}
 .smallFram {
   background-image: url("../public/smallFrame.png");
   background-repeat: no-repeat;
