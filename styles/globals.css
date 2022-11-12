@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@600&display=swap");
-
+html {
+  scroll-behavior: smooth;
+}
 .customBtN {
   position: relative;
   z-index: 0;
@@ -198,7 +200,11 @@
   width: 100%;
   height: 100%;
 }
-
+.menubar {
+  background-image: url("../public/dashmenu.png");
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
 @media (max-width: 800px) {
   .logo {
     width: unset;

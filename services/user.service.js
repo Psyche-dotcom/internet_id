@@ -23,14 +23,14 @@ function logout() {
   // remove user from local storage, publish null to user subscribers and redirect to login page
   localStorage.removeItem("user");
   userSubject.next(null);
-  Router.push("/signin");
+  Router.push("/");
 }
 // auth
 function login(data) {
   return fetchWrapper.post(`${baseUrl}/auth/login/`, data).then((user) => {
     // publish user to subscribers and store in local storage to stay logged in between page refreshes
     userSubject.next(user);
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user.data.token));
     return user;
   });
 }

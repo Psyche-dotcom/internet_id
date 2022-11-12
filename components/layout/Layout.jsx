@@ -50,14 +50,14 @@ const Layout = ({ children }) => {
                   customNavBg={customNavBG}
                 />
               ))}
-              <Link href="/demo">
+              <Link href="/sign_up">
                 <span
                   className={` text-xl  text-white ${
                     customNavBG ? "before:bg-deepBlue" : "before:bg-white"
                   } bg-button lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtN`}
                   aria-label="Book-Demo"
                 >
-                  Book Demo{" "}
+                  Sign Up{" "}
                 </span>
               </Link>
             </div>

@@ -31,7 +31,9 @@ const Login = () => {
     try {
       await userService.login(data);
       router.push("/dashboard");
-    } catch (err) {}
+    } catch (err) {
+      router.push("/login");
+    }
   };
 
   // useEffect(() => {
