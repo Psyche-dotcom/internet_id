@@ -74,7 +74,7 @@ const Sign_up = () => {
                 <button
                   onClick={() => setclient(false)}
                   className={`border border-cardBg rounded-l-lg px-2 py-1 text-sm ${
-                    client && "bg-cardBg"
+                    client ? "" : "bg-deepBlue text-white"
                   } `}
                 >
                   User
@@ -82,7 +82,7 @@ const Sign_up = () => {
                 <button
                   onClick={() => setclient(true)}
                   className={`border border-cardBg rounded-r-lg px-2 py-1 text-sm ${
-                    !client && "bg-cardBg"
+                    !client ? "" : "bg-deepBlue text-white"
                   }`}
                 >
                   Developer

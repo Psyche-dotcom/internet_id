@@ -1,12 +1,11 @@
 import { ArrowBackIosNew } from "@mui/icons-material";
 import Link from "next/link";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Logo from "../public/logo.png";
 import { useRouter } from "next/router";
 import { userService } from "../services";
-import { useFormik } from "formik";
-import { basicSchema } from "../components/schemas";
+
 import Field from "../components/simpleComponent/Field";
 
 const Login = () => {
@@ -28,12 +27,7 @@ const Login = () => {
   //     );
   //   }
   // };
-  // useEffect(() => {
-  //   // redirect to home if already logged in
-  //   if (userService.userValue) {
-  //     router.push("/");
-  //   }
-  // }, []);
+
   // const {
   //   values,
   //   handleChange,
@@ -66,7 +60,14 @@ const Login = () => {
   //     console.log(error.response.data);
   //   }
   // };
-
+  // useEffect(() => {
+  //   // redirect to home if already logged in
+  //   if (userService.userValue) {
+  //     router.push("/dashboard");
+  //   } else {
+  //     router.push("/login");
+  //   }
+  // }, []);
   const login = async () => {
     const data = { internet_id: internetId, password: password };
     try {

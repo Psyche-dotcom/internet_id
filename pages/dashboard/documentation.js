@@ -68,7 +68,7 @@ const documentation = () => {
   };
 
   return (
-    <LayoutDash dev={data.data.is_dev}>
+    <LayoutDash dev={data.data.is_dev} logout_user={logout_user}>
       <main className="lg:flex h-screen w-screen overflow-hidden">
         <section className="w-1/4 px-10 py-10 bg-cardBg menubar hidden lg:block">
           <div className=" flex flex-col justify-between h-full">
@@ -135,13 +135,12 @@ const documentation = () => {
         </section>
         <section className="h-full lg:w-3/4 px-6 lg:px-20 py-20 bg-deepBlue">
           <h2 className="text-center text-whiteTran capitalize text-3xl lg:text-6xl mb-8">
-            Welcome
-            {data.data.first_name}
+            Welcome {data.data.first_name}
           </h2>
           <div className="adminBg mx-auto flex justify-center items-center">
             <div className="flex flex-col gap-8 items-center">
               <div className="flex flex-col gap-4 text-center w-2/3 ">
-                <h3 className="text-3xl font-sans text-deepBlue">
+                <h3 className="lg:text-3xl text-2xl font-sans text-deepBlue">
                   Understands how Internet ID operates and how to use it
                 </h3>
                 <p className="text-base text-adminTx font-body">

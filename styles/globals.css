@@ -212,7 +212,15 @@ html {
   background-repeat: no-repeat;
   background-position: 50% top, 50% bottom;
 }
+.lottieSize {
+  width: 200px;
+  height: 120px;
+}
 @media (min-width: 1024px) {
+  .lottieSize {
+    width: 400px;
+    height: 120px;
+  }
   .adminBg {
     background-image: url("../public/adminb.png");
     background-repeat: no-repeat;

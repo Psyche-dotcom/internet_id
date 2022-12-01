@@ -35,6 +35,7 @@ const api_key = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
   if (error)
     return (
       <div className="w-screen h-screen flex items-center justify-center">
@@ -71,7 +72,7 @@ const api_key = () => {
 
   const value = data.data.private_key;
   return (
-    <LayoutDash dev={data.data.is_dev}>
+    <LayoutDash dev={data.data.is_dev} logout_user={logout_user}>
       <main className="lg:flex h-screen w-screen overflow-hidden">
         <section className="w-1/4 px-10 py-10 bg-cardBg menubar hidden lg:block">
           <div className=" flex flex-col justify-between h-full">
@@ -138,13 +139,15 @@ const api_key = () => {
         </section>
         <section className="h-full lg:w-3/4 px-6 lg:px-20 py-20 bg-deepBlue">
           <h2 className="text-center text-whiteTran capitalize text-3xl lg:text-6xl mb-8">
-            Welcome
-            {data.data.first_name}
+            Welcome {data.data.first_name}
           </h2>
           <div className="adminBg mx-auto flex justify-center items-center">
-            <div className="flex flex-col gap-8 items-center">
+            <div
+              className="flex flex-col gap-8 items-center"
+              style={{ width: "inherit" }}
+            >
               <div className="flex flex-col gap-4 text-center w-2/3 ">
-                <h3 className="text-3xl font-sans text-deepBlue">
+                <h3 className="text-2xl lg:text-3xl font-sans text-deepBlue">
                   Click the clipboard icon to copy your API Keys{" "}
                 </h3>
                 <p className="text-base text-adminTx font-body">
@@ -155,7 +158,7 @@ const api_key = () => {
                   another, to share functionality.
                 </p>
               </div>
-              <div className="flex border justify-end w-2/3  border-bb rounded-lg">
+              <div className="flex border justify-end w-2/3 overflow-x-hidden  border-bb rounded-lg">
                 <span className="bg-white p-2 w-5/6">
                   {data.data.private_key}
                 </span>{" "}

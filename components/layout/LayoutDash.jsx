@@ -1,13 +1,13 @@
 import { Close, Menu } from "@mui/icons-material";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import NavItem from "./NavItem";
+
 import { navData, navDataDash } from "../../dummyData/data";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo.png";
 import MobileNavItem from "./mobileNavItem";
-const LayoutDash = ({ children, dev }) => {
+const LayoutDash = ({ children, dev, logout_user }) => {
   const [menuMobile, setmenuMobile] = useState(false);
   const [customNavBG, setcustomNavBG] = useState(false);
   const changeNavColor = () => {
@@ -79,6 +79,17 @@ const LayoutDash = ({ children, dev }) => {
                     </span>
                   </Link>
                 ))}
+              <div className="self-center">
+                <span
+                  onClick={logout_user}
+                  className={` text-xl  text-white
+                    before:bg-button
+                    bg-deepBlue px-4 py-2 xl:px-8 xl:py-4 customBtN`}
+                  aria-label="Log-Out"
+                >
+                  Log Out{" "}
+                </span>
+              </div>
             </div>
           )}
         </div>

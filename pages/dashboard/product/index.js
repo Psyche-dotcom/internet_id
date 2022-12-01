@@ -106,7 +106,7 @@ const product = () => {
     console.log(`Bearer ${localstore}`);
   };
   return (
-    <LayoutDash dev={data.data.is_dev}>
+    <LayoutDash dev={data.data.is_dev} logout_user={logout_user}>
       <main className="lg:flex h-screen w-screen overflow-hidden">
         <section className="w-1/4 px-10 py-10 bg-cardBg menubar hidden lg:block">
           <div className=" flex flex-col justify-between h-full">
@@ -173,8 +173,7 @@ const product = () => {
         </section>
         <section className="h-full lg:w-3/4 px-6 lg:px-20 py-20 bg-deepBlue">
           <h2 className="text-center text-whiteTran text-3xl lg:text-6xl mb-8 capitalize">
-            Welcome
-            {data.data.first_name}
+            Welcome {data.data.first_name}
           </h2>
           <div className="adminBg mx-auto flex justify-center items-center">
             <div className=" flex flex-col gap-8 w-full  px-8 py-8 lg:px-0 lg:py-0 lg:w-auto">
