@@ -4,7 +4,9 @@ import React from "react";
 import HeroImage from "../public/teamHero.png";
 import Logo from "../public/logo.png";
 import Layout from "../components/layout/Layout";
-
+import "aos/dist/aos.css";
+import Aos from "aos";
+import { useEffect } from "react";
 import style from "../public/style.png";
 import king from "../public/Kha.png";
 import g from "../public/R.png";
@@ -12,20 +14,26 @@ import s from "../public/S.png";
 import b from "../public/B.png";
 import ProfileCard from "../components/simpleComponent/ProfileCard";
 const about = () => {
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
   return (
     <Layout>
-      <main className="bg-mainLandBg">
+      <main className="bg-mainLandBg overflow-x-hidden">
         <section className="heroBg">
           <div className="w-11/12 md:w-10/12 xl:w-9/12 mx-auto ">
             <div className="flex flex-col-reverse items-center lg:flex-row gap-8 lg:gap-4 pt-40 pb-20 lg:pt-60 lg:pb-40  justify-between">
-              <article className="flex flex-col gap-4 lg:gap-8 w-full  lg:w-2/4">
+              <article
+                className="flex flex-col gap-4 lg:gap-8 w-full  lg:w-2/4"
+                data-aos="fade-right"
+              >
                 <h1 className="text-white font-sans text-2xl leading-snug md:text-4xl md:leading-loose lg:leading-snug xl:text-5xl xl:leading-snug 2xl:text-6xl  2xl:leading-normal font-medium">
                   Team <span className="text-button">Optimus</span> @ Hackfest
                   2022, Hackathon with Seamfix{" "}
                 </h1>
                 <p className="text-whiteTran font-body leading-snug text-base xl:text-2xl xl:leading-relaxed">
                   Transforming digital identity with our Internet Identity
-                  ID(InternetID),we are able to eliminate the possibility of
+                  ID(InternetID), we are able to eliminate the possibility of
                   information being exposed to the public by cybercriminals,
                   bots and hackers. Improving on critical probelms like delay in
                   transactions, waste of time and loss of money.
@@ -49,16 +57,24 @@ const about = () => {
                   </Link>
                 </div>
               </article>
-              <Image src={HeroImage} alt="llustration" />
+              <Image
+                src={HeroImage}
+                alt="llustration"
+                className="animated"
+                data-aos="fade-left"
+              />
             </div>
           </div>
         </section>
         <section>
-          <div className="w-11/12 md:w-10/12 xl:w-9/12 mx-auto py-20 md:py-30 lg:py-40">
+          <div
+            className="w-11/12 md:w-10/12 xl:w-9/12 mx-auto py-20 md:py-30 lg:py-40"
+            data-aos="fade-up"
+          >
             <div className="flex items-center justify-center mb-16">
               <Image src={Logo} alt="logo" className="text-center" />
             </div>
-            <div className="flex items-center justify-center lg:gap-20 gap:8 flex-wrap">
+            <div className="flex items-center justify-center gap-10 lg:gap-20 gap:8 flex-wrap">
               <span className="lg:w-4/12">
                 <div className=" customCard bg-cardBg flex flex-col  gap-4 items-center justify-center p-16 text-center">
                   <p className="font-body text-deepBlue">
@@ -108,7 +124,7 @@ const about = () => {
         <section className="py-20 md:py-30 lg:py-40 bg-lightBlue CTA">
           <div className="w-11/12 md:w-10/12 xl:w-9/12 mx-auto ">
             <div className="flex flex-col items-center lg:flex-row gap-8 justify-between">
-              <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-8" data-aos="slide-up">
                 <h3 className="text-white font-sans text-3xl">Style Guide</h3>
                 <div className="flex flex-col mt-4">
                   <span className="text-white font-body text-2xl mb-2">
@@ -121,7 +137,7 @@ const about = () => {
                 </div>
                 <p className="text-white font-body">Fonts: Inter & Helvetica</p>
               </div>
-              <div>
+              <div data-aos="slide-up">
                 <h3 className="text-white font-body text-2xl font-semibold mb-2">
                   Medium
                 </h3>
@@ -133,13 +149,15 @@ const about = () => {
                   </span>
                 </div>
               </div>
-              <Image src={style} alt="style" />
+              <Image src={style} alt="style" data-aos="slide-up" />
             </div>
           </div>
         </section>
         <section>
           <div className="w-11/12 md:w-10/12 xl:w-9/12 mx-auto py-20 md:py-30 lg:py-40">
-            <h1 className="text-white text-5xl">Meet the Team</h1>
+            <h1 className="text-white text-5xl" data-aos="fade-right">
+              Meet the Team
+            </h1>
             <div className="flex flex-wrap gap-4 justify-between mt-8">
               <ProfileCard
                 name="Khadijah Arowosegbe"

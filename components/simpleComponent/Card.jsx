@@ -2,9 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const Card = ({ icon, title, iconTitle, description, BookDemo }) => {
+const Card = ({
+  icon,
+  title,
+  iconTitle,
+  description,
+  BookDemo,
+  animationType,
+}) => {
   return (
-    <span className="flex-1">
+    <span className="flex-1" data-aos={animationType}>
       <div className=" customCard bg-cardBg flex flex-col  gap-4 items-center justify-center p-16 text-center">
         <Image src={icon} alt={iconTitle} />
         <h4 className="font-semibold font-sans text-deepBlue text-lg md:text-xl xll:text-2xl">

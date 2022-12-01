@@ -7,7 +7,10 @@ const Hero = () => {
     <section className="heroBg">
       <div className="w-11/12 md:w-10/12 xl:w-9/12 mx-auto ">
         <div className="flex flex-col-reverse items-center lg:flex-row gap-8 lg:gap-4 pt-40 pb-20 lg:pt-60 lg:pb-40  justify-between">
-          <article className="flex flex-col gap-4 lg:gap-8 w-full  lg:w-2/4">
+          <article
+            className="flex flex-col gap-4 lg:gap-8 w-full  lg:w-2/4"
+            data-aos="fade-right"
+          >
             <h1 className="text-white font-sans text-2xl leading-snug md:text-4xl md:leading-loose lg:leading-snug xl:text-5xl xl:leading-snug 2xl:text-6xl  2xl:leading-normal font-medium">
               Transform Digital Identity with Internet Identification Number{" "}
             </h1>
@@ -35,7 +38,12 @@ const Hero = () => {
               </Link>
             </div>
           </article>
-          <Image src={HeroImage} alt="llustration" />
+          <Image
+            src={HeroImage}
+            alt="llustration"
+            className="animated"
+            data-aos="fade-left"
+          />
         </div>
       </div>
     </section>

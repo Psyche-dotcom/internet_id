@@ -1,17 +1,14 @@
 import Image from "next/image";
-import Link from "next/link";
+
 import React from "react";
 import idIcon from "../public/idn.png";
-import chat from "../public/chat.png";
-import keys from "../public/key.png";
-import logo from "../public/dnd.png";
-import copy from "../public/copy.png";
+
 import Layout from "../components/layout/Layout";
 const documentation = () => {
   return (
     <Layout>
-      <main className="lg:flex h-screen w-screen overflow-hidden pt-28">
-        <section className="w-1/4 px-10 py-10 bg-cardBg">
+      <main className="lg:flex h-screen w-screen overflow-scroll lg:overflow-hidden lg:pt-28">
+        <section className="w-1/4 px-10 py-10 bg-cardBg hidden lg:block">
           <div className=" flex flex-col justify-between h-full">
             <div>
               <div className="flex flex-col gap-4  ">
@@ -54,8 +51,8 @@ const documentation = () => {
             </div>
           </div>
         </section>
-        <section className="w-3/4 px-20 py-20 bg-deepBlue overflow-scroll flex flex-col gap-6">
-          <div className="flex flex-col gap-4">
+        <section className="w-full lg:w-3/4 px-5 py-10 lg:px-20 lg:py-20 bg-deepBlue overflow-scroll flex flex-col gap-6">
+          <div className="flex flex-col gap-4 pt-16 lg:pt-0">
             <h1 className="font-bold text-5xl font-sans text-white">
               Overview
             </h1>

@@ -6,7 +6,7 @@ const Verify = () => {
   return (
     <section className="py-20 md:py-30 lg:py-40 Verify">
       <div className="w-11/12 md:w-10/12 xl:w-9/12 mx-auto ">
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-center gap-8" data-aos="fade-up">
           <h1 className="text-white font-sans text-2xl text-center md:2/3 lg:w-1/2 2xl:w-1/3 leading-snug md:text-4xl md:leading-loose lg:leading-snug xl:text-5xl xl:leading-snug font-medium">
             Verify and Assess your Customers in no Time
           </h1>

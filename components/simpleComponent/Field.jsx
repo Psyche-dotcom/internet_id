@@ -16,7 +16,7 @@ const Field = ({
         type={type}
         placeholder={placeholder}
         id={id}
-        className="w-full  bg-cardBg p-4 text-sm rounded-lg"
+        className="w-full  bg-cardBg p-4 border border-deepBlue lg:border-none text-sm rounded-lg"
         onChange={(e) => setstate(e.target.value)}
       />
       {errorState && <p className="errorMessage">{error}</p>}

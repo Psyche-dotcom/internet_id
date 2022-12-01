@@ -11,6 +11,7 @@ module.exports = {
       deepBlue: "#203354",
       mainLandBg: "#2B4570",
       white: "#ffffff",
+      red: "rgb(255, 0, 0)",
       whiteTran: "#FFFFFFCC",
       button: "#E49273",
       buttonBlue: "#7180AC",

@@ -2,12 +2,12 @@ import { Close, Menu } from "@mui/icons-material";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import NavItem from "./NavItem";
-import { navData } from "../../dummyData/data";
+import { navData, navDataDash } from "../../dummyData/data";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo.png";
 import MobileNavItem from "./mobileNavItem";
-const Layout = ({ children }) => {
+const LayoutDash = ({ children, dev }) => {
   const [menuMobile, setmenuMobile] = useState(false);
   const [customNavBG, setcustomNavBG] = useState(false);
   const changeNavColor = () => {
@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
     <>
       <Head></Head>
       <nav
-        className="py-6 lg:py-12 fixed z-40 w-full"
+        className="lg:hidden py-6 lg:py-12 fixed z-40 w-full"
         style={{ backgroundColor: customNavBG ? "white" : "#203354" }}
       >
         <div className="w-11/12 md:w-10/12 xl:w-9/12 mx-auto ">
@@ -41,26 +41,6 @@ const Layout = ({ children }) => {
               <Image src={logo} alt="InternetID" className="logo" />
             </Link>
 
-            <div className="hidden lg:flex lg:gap-8  ">
-              {navData.map(({ title, id, link }) => (
-                <NavItem
-                  key={id}
-                  title={title}
-                  link={link}
-                  customNavBg={customNavBG}
-                />
-              ))}
-              <Link href="/sign_up">
-                <span
-                  className={` text-xl  text-white ${
-                    customNavBG ? "before:bg-deepBlue" : "before:bg-white"
-                  } bg-button lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtN`}
-                  aria-label="Book-Demo"
-                >
-                  Sign Up{" "}
-                </span>
-              </Link>
-            </div>
             <div className="lg:hidden">
               {menuMobile ? (
                 <Close
@@ -85,9 +65,20 @@ const Layout = ({ children }) => {
           </div>
           {menuMobile && (
             <div className="flex flex-col gap-6 mt-6  bg-white px-6 py-10">
-              {navData.map(({ title, id, link }) => (
+              {navDataDash.map(({ title, id, link }) => (
                 <MobileNavItem key={id} title={title} link={link} />
               ))}
+              {dev === "1" ||
+                (dev === 1 && (
+                  <Link href="/dashboard/product">
+                    <span
+                      className={` cursor-pointer customPoint after:content-['']  after:absolute  after:h-1 relative  text-deepBlue text-sm  after:bg-deepBlue self-start `}
+                      aria-label=" Add a Product"
+                    >
+                      Add a Product
+                    </span>
+                  </Link>
+                ))}
             </div>
           )}
         </div>
@@ -99,4 +90,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default LayoutDash;

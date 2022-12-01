@@ -9,9 +9,12 @@ const CTA = () => {
       <div className="w-11/12 md:w-10/12 xl:w-9/12 mx-auto ">
         <div className="flex flex-col items-center lg:flex-row gap-8 justify-between">
           <div className="lg:w-3/5">
-            <Image src={Phone} alt="phone" />
+            <Image src={Phone} alt="phone" data-aos="fade-right" />
           </div>
-          <article className="flex flex-col gap-4 lg:gap-8 w-full  lg:w-2/4">
+          <article
+            className="flex flex-col gap-4 lg:gap-8 w-full  lg:w-2/4"
+            data-aos="fade-left"
+          >
             <h1 className="text-white font-sans text-2xl leading-snug md:text-4xl md:leading-loose lg:leading-snug xl:text-5xl xl:leading-snug font-medium">
               Protect your business with Internet ID
             </h1>

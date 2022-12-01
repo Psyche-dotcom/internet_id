@@ -5,13 +5,17 @@ import Newsletters from "../components/sections/Newsletters";
 import Statistics from "../components/sections/Statistics";
 import UseCase from "../components/sections/UseCase";
 import Verify from "../components/sections/Verify";
-import Card from "../components/simpleComponent/Card";
-import CardNew from "../components/simpleComponent/CardNew";
-import idIcon from "../public/id.svg";
+import "aos/dist/aos.css";
+import Aos from "aos";
+import { useEffect } from "react";
 export default function Home() {
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
+
   return (
     <Layout>
-      <main className="bg-mainLandBg">
+      <main className="bg-mainLandBg overflow-x-hidden">
         <Hero />
         <UseCase />
         <Statistics />
