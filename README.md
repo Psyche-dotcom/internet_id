@@ -20,7 +20,7 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 ## About the App
 
-This is fullstack web application build on nextjs for frontend and python for backend. Internet ID website allow user to generate hack proof unique id which store their basic info. The generated unique id can be used to sign up a user and validate whether the user is fake or real by collecting their NIN, BVN, DOB and some other personal details. the app consist of dashboard both for the user and the developer.
+This is fullstack web application build on nextjs for frontend and python for backend. Internet ID website allow user to generate hack proof unique id which store their basic info. The generated unique id can be used to sign up a user and validate whether the user is fake or real by collecting their NIN, BVN, DOB and some other personal details. the app consist of dashboard both for the use r and the developer.
 
 ## Frontend Tech Stack for the App
 

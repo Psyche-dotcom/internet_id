@@ -53,7 +53,6 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
                 type="button"
               >
                 <span
-                  // onClick={login}
                   className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
                   aria-label="Sign_in"
                 >
@@ -69,7 +68,6 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
                 className="text-left xl:mt-10"
               >
                 <span
-                  // onClick={login}
                   className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
                   aria-label="Sign_in"
                 >
@@ -292,11 +290,11 @@ const CustomForm = ({ client }) => {
               .required(
                 "This field is required, input your bank verification number"
               ),
-            international_id: Yup.string()
-              .min(9, "Your international identity is invalid")
-              .required(
-                "This field is required, input your international identity"
-              ),
+            // international_id: Yup.string()
+            //   .min(9, "Your international identity is invalid")
+            //   .required(
+            //     "This field is required, input your international identity"
+            //   ),
             gender: Yup.string().required(
               "This field is required, input your gender"
             ),

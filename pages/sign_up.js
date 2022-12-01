@@ -1,78 +1,69 @@
 import { ArrowBackIosNew } from "@mui/icons-material";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Image from "next/image";
 import React, { useState } from "react";
+import Field from "../components/simpleComponent/Field";
 import Logo from "../public/logo.png";
-
-import CustomForm from "../components/simpleComponent/form";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const Sign_up = () => {
   const [client, setclient] = useState(false);
-
-  // const submitForm = async (values) => {
-  //   console.log(values);
-  //   // try {
-  //   //   const resp = await axios.post(url, {
-  //   //     first_name: values.first_name,
-  //   //     last_name: values.last_name,
-  //   //     email: values.email,
-  //   //     password: values.password,
-  //   //     phone_number: values.phone_number,
-  //   //     date_of_birth: values.date_of_birth,
-  //   //     gender: values.gender,
-  //   //     country: values.country,
-  //   //     international_id: values.international_id,
-
-  //   //     bank_verification_num: values.bank_verification_num,
-  //   //     is_dev: client ? true : false,
-  //   //   });
-  //   //   console.log(resp.data);
-  //   // } catch (error) {
-  //   //   console.log(error.response.data);
-  //   // }
-  // };
-
-  // const {
-  //   values,
-  //   handleChange,
-  //   handleBlur,
-  //   handleSubmit,
-  //   errors,
-  //   touched,
-  //   isSubmitting,
-  // } = useFormik({
-  //   initialValues: {
-  //     first_name: "",
-  //     last_name: "",
-  //     email: "",
-  //     password: "",
-  //     phone_number: "",
-  //     date_of_birth: "",
-  //     gender: "",
-  //     country: "",
-  //     international_id: "",
-  //     bank_verification_num: "",
-  //   },
-  //   validationSchema: signUpSchema,
-  //   submitForm,
-  // });
-  // console.log(values);
+  const [firstname, setfirstname] = useState("");
+  const [lastname, setlastname] = useState("");
+  const [password, setpassword] = useState("");
+  const [country, setcountry] = useState("");
+  const [Dob, setDob] = useState("");
+  const [Email, setEmail] = useState("");
+  const [phone, setphone] = useState("");
+  const [BVN, setBVN] = useState("");
+  const [NIN, setNIN] = useState("");
+  const [gender, setgender] = useState("");
+  const router = useRouter();
+  const url = "https://internetid.geebee.engineer/api/v1/auth/register/";
+  const submitForm = async () => {
+    try {
+      const resp = await axios.post(url, {
+        first_name: firstname,
+        last_name: lastname,
+        email: Email,
+        password: password,
+        phone_number: phone,
+        date_of_birth: Dob,
+        gender: gender,
+        country: country,
+        international_id: NIN,
+        bank_verification_num: BVN,
+        is_dev: client ? true : false,
+      });
+      router.push("/account_sucess");
+      console.log(resp.data);
+    } catch (error) {
+      console.log(error.response.data);
+      alert(
+        `Your  details is ${error.response.data.error} and ${error.response.data.message} please check your details`
+      );
+    }
+  };
 
   return (
-    <main className="lg:flex bg-signBg ">
-      <section className="flex-1 py-16 h-screen  w-11/12 mx-auto lg:px-10 lg:py-5 bg-signBg">
-        <div className="flex flex-col gap-4">
-          <Link href="/">
-            <ArrowBackIosNew className="hidden lg:block" />
-          </Link>{" "}
-          <Link href="/">
-            <Image
-              src={Logo}
-              alt="logo"
-              className="logo lg:hidden self-start"
-            />
-          </Link>
+    <main className="lg:flex bg-signBg overflow-x-hidden">
+      <section className="flex-1 py-10 h-screen  w-11/12 mx-auto lg:px-10 lg:py-5 bg-signBg">
+        <div className="flex flex-col gap-8">
+          <div className=" lg:block hidden">
+            <Link href="/">
+              <ArrowBackIosNew className="hidden lg:block" />
+            </Link>{" "}
+          </div>
+          <div className=" block lg:hidden">
+            <Link href="/">
+              <Image
+                src={Logo}
+                alt="logo"
+                className="logo lg:hidden self-start"
+              />
+            </Link>
+          </div>
           <div className="flex flex-col gap-20 lg:w-4/5 lg:mx-auto">
             <div className="flex flex-col justify-between gap-8 lg:flex-row">
               <div className="flex flex-col gap-4 ">
@@ -98,7 +89,169 @@ const Sign_up = () => {
                 </button>
               </div>
             </div>
-            <CustomForm client={client} />
+
+            <form>
+              <div className="flex flex-col gap-8" id="stepUser1">
+                <Field
+                  id="first_name"
+                  placeholder="First Name"
+                  type="text"
+                  setstate={(e) => setfirstname(e)}
+                  error="Your name must be greater than one Char."
+                />
+                <Field
+                  id="last_name"
+                  placeholder="Last Name"
+                  type="text"
+                  setstate={(e) => setlastname(e)}
+                  error="Your Last Name must be greater than one Char."
+                />
+                <Field
+                  id="Country"
+                  placeholder="Country"
+                  type="text"
+                  setstate={(e) => setcountry(e)}
+                  error="Enter your country"
+                />
+
+                <div
+                  onClick={() => {
+                    const stepUser1 = document.querySelector("#stepUser1");
+                    const stepUser2 = document.querySelector("#stepUser2");
+                    console.log(stepUser1);
+                    stepUser1.style.display = "none";
+                    stepUser2.style.display = "flex";
+                  }}
+                >
+                  <span
+                    className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
+                    aria-label="Next"
+                  >
+                    Next
+                  </span>
+                </div>
+
+                <p className="text-greyLight mt-4 text-center">1/3</p>
+              </div>
+              <div className=" hidden flex-col gap-8" id="stepUser2">
+                <Field
+                  id="DOB"
+                  placeholder="Date of Birth"
+                  type="date"
+                  setstate={(e) => setDob(e)}
+                  error="Enter your date of birth"
+                />
+                <Field
+                  id="email"
+                  placeholder="Email Address"
+                  type="email"
+                  setstate={(e) => setEmail(e)}
+                />
+                <Field
+                  id="Password"
+                  placeholder="Password"
+                  type="password"
+                  setstate={(e) => setpassword(e)}
+                  error="Your Internet ID must be greater than one Char."
+                />
+                <div className="flex gap-10 items-center">
+                  <div
+                    onClick={() => {
+                      const stepUser1 = document.querySelector("#stepUser1");
+                      const stepUser2 = document.querySelector("#stepUser2");
+                      const stepUser3 = document.querySelector("#stepUser3");
+                      stepUser1.style.display = "flex";
+                      stepUser2.style.display = "none";
+                      stepUser3.style.display = "none";
+                    }}
+                  >
+                    <span
+                      className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
+                      aria-label="Next"
+                    >
+                      Back
+                    </span>
+                  </div>
+                  <div
+                    onClick={() => {
+                      const stepUser1 = document.querySelector("#stepUser1");
+                      const stepUser2 = document.querySelector("#stepUser2");
+                      const stepUser3 = document.querySelector("#stepUser3");
+                      stepUser1.style.display = "none";
+                      stepUser2.style.display = "none";
+                      stepUser3.style.display = "flex";
+                    }}
+                  >
+                    <span
+                      className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
+                      aria-label="Next"
+                    >
+                      Next
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-greyLight mt-4 text-center">2/3</p>
+              </div>
+              <div className=" hidden flex-col gap-8" id="stepUser3">
+                <Field
+                  id="phone"
+                  placeholder="Phone Number"
+                  type="tel"
+                  setstate={(e) => setphone(e)}
+                  error="Your Internet ID must be greater than one Char."
+                />
+                <Field
+                  id="BVN"
+                  placeholder="Bank Verification Number"
+                  type="text"
+                  setstate={(e) => setBVN(e)}
+                  error="Invalid BVN"
+                />
+                <Field
+                  id="NIN"
+                  placeholder="international Number"
+                  type="text"
+                  setstate={(e) => setNIN(e)}
+                  error="Invalid NIN"
+                />
+                <Field
+                  id="Gender"
+                  placeholder="Gender"
+                  type="text"
+                  setstate={(e) => setgender(e)}
+                />
+                <div className="flex gap-10 items-center">
+                  <div
+                    onClick={() => {
+                      const stepUser1 = document.querySelector("#stepUser1");
+                      const stepUser2 = document.querySelector("#stepUser2");
+                      const stepUser3 = document.querySelector("#stepUser3");
+                      stepUser1.style.display = "none";
+                      stepUser2.style.display = "flex";
+                      stepUser3.style.display = "none";
+                    }}
+                  >
+                    <span
+                      className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
+                      aria-label="Next"
+                    >
+                      Back
+                    </span>
+                  </div>
+                  <div onClick={submitForm}>
+                    <span
+                      className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
+                      aria-label="Sign_up"
+                    >
+                      Create ID
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-greyLight mt-4 text-center">3/3</p>
+              </div>
+            </form>
           </div>
         </div>
       </section>

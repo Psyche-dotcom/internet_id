@@ -7,8 +7,6 @@ export const basicSchema = yup.object().shape({
     .required("This field is required, input your internet id"),
   password: yup
     .string()
-    .min(5)
-    .matches(passwordRules, { message: "Incorrect password format" })
     .required("This field is required, input your password"),
 });
 export const signUpSchema = yup.object().shape({
