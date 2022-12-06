@@ -5,9 +5,9 @@ import idIcon from "../../../public/idn.png";
 import chat from "../../../public/chat.png";
 import keys from "../../../public/key.png";
 import logo from "../../../public/dnd.png";
+import documents from "../../../public/book.png";
 import Lottie from "react-lottie";
 import animationData from "../../../public/Loading.json";
-import document from "../../../public/book.png";
 import prod from "../../../public/plus.png";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -19,7 +19,10 @@ const product = () => {
   const [business, setbusiness] = useState("");
   const [project, setproject] = useState("");
   const [website, setwebsite] = useState("");
+  const [websitestate, setwebsitestate] = useState(false);
   const [email, setemail] = useState("");
+  const [errorproduct, setproducterror] = useState("");
+  const [errorproductstate, setproducterrorstate] = useState(false);
 
   const router = useRouter();
   const product_url = "https://internetid.geebee.engineer/api/v1/products/";
@@ -101,9 +104,10 @@ const product = () => {
       );
       router.push("/dashboard/product/sucess");
     } catch (error) {
-      console.error(error);
+      console.error();
+      setproducterror(error.response.data.error);
+      setproducterrorstate(true);
     }
-    console.log(`Bearer ${localstore}`);
   };
   return (
     <LayoutDash dev={data.data.is_dev} logout_user={logout_user}>
@@ -149,7 +153,7 @@ const product = () => {
                 </Link>
                 <Link href="/dashboard/documentation">
                   <div className="flex gap-4 b px-3 py-3 items-center rounded">
-                    <Image src={document} alt="identity" />
+                    <Image src={documents} alt="identity" />
                     <p className="text-deepBlue font-body text-lg">
                       Documentation
                     </p>
@@ -176,9 +180,9 @@ const product = () => {
             Welcome {data.data.first_name}
           </h2>
           <div className="adminBg mx-auto flex justify-center items-center">
-            <div className=" flex flex-col gap-8 w-full  px-8 py-8 lg:px-0 lg:py-0 lg:w-auto">
-              <div className="flex justify-between flex-col lg:flex-row gap-4 lg:gap-16">
-                <div className="flex flex-col gap-4">
+            <div className=" flex flex-col gap-8 w-full lg:w-3/4  px-8 py-8 lg:px-0 lg:py-0">
+              <div className="flex justify-between flex-col w-full gap-4 lg:gap-16">
+                <div className="flex flex-col gap-4 " id="product_step1">
                   <Field
                     id="commpany_name"
                     placeholder="Company’s Name"
@@ -193,39 +197,89 @@ const product = () => {
                     setstate={(e) => setbusiness(e)}
                     error="Your business type must be greater than one Char."
                   />
-                </div>
-                <div className=" flex flex-col gap-4">
                   <Field
                     id="website_url"
                     placeholder="Website_URL"
                     type="url"
                     setstate={(e) => setwebsite(e)}
-                    error="Invalid url"
+                    error="Invalid url, url must start with https://"
+                    errorState={websitestate}
                   />
+                  <div
+                    className="mt-5"
+                    onClick={() => {
+                      let httpRegex =
+                        /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
+                      let testresult = httpRegex.test(website);
+                      if (testresult) {
+                        setwebsitestate(false);
+                        const step1 = document.querySelector("#product_step1");
+                        const step2 = document.querySelector("#product_step2");
+                        step1.style.display = "none";
+                        step2.style.display = "flex";
+                      } else {
+                        setwebsitestate(true);
+                      }
+                    }}
+                  >
+                    <span
+                      className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
+                      aria-label="Next"
+                    >
+                      Next
+                    </span>
+                  </div>
+                </div>
+                <div className=" flex flex-col gap-4" id="product_step2">
                   <Field
                     id="Company_email"
                     placeholder="Company’s Email Address"
                     type="email"
                     setstate={(e) => setemail(e)}
                   />
+                  <div className="w-full">
+                    <textarea
+                      name="project_description"
+                      className="w-full  bg-cardBg p-4 text-sm rounded-lg border border-deepBlue lg:border-none"
+                      placeholder="Project Description"
+                      onChange={(e) => setproject(e.target.value)}
+                    ></textarea>
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    {errorproductstate && (
+                      <div>
+                        <p className="text-red text-xs">{errorproduct}</p>
+                      </div>
+                    )}
+                    <div className="flex item-center mt-5 gap-3">
+                      <div
+                        onClick={() => {
+                          const step1 =
+                            document.querySelector("#product_step1");
+                          const step2 =
+                            document.querySelector("#product_step2");
+                          step1.style.display = "flex";
+                          step2.style.display = "none";
+                        }}
+                      >
+                        <span
+                          className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
+                          aria-label="back"
+                        >
+                          Back
+                        </span>
+                      </div>
+                      <div onClick={create_product}>
+                        <span
+                          className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
+                          aria-label="Next"
+                        >
+                          Create Product Key
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              <div className="w-full">
-                <textarea
-                  name="project_description"
-                  className="w-full  bg-cardBg p-4 text-sm rounded-lg border border-deepBlue lg:border-none"
-                  placeholder="Project Description"
-                  onChange={(e) => setproject(e.target.value)}
-                ></textarea>
-              </div>
-              <div onClick={create_product}>
-                <span
-                  className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
-                  aria-label="Next"
-                >
-                  Create Product Key
-                </span>
               </div>
             </div>
           </div>

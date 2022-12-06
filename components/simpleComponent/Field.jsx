@@ -19,7 +19,7 @@ const Field = ({
         className="w-full  bg-cardBg p-4 border border-deepBlue lg:border-none text-sm rounded-lg"
         onChange={(e) => setstate(e.target.value)}
       />
-      {errorState && <p className="errorMessage">{error}</p>}
+      {errorState && <p className="errorMessage text-sm text-red">{error}</p>}
     </div>
   );
 };

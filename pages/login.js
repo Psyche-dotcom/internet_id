@@ -4,76 +4,30 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Logo from "../public/logo.png";
 import { useRouter } from "next/router";
-import { userService } from "../services";
-
 import Field from "../components/simpleComponent/Field";
+import axios from "axios";
 
 const Login = () => {
   const router = useRouter();
-  // const onSubmit = async (values, actions) => {
-  //   console.log("submitted");
-  //   console.log(values);
-  //   console.log(actions);
-
-  //   const data = { internet_id: values.internet_id, password: values.password };
-  //   try {
-  //     await userService.login(data);
-  //     router.push("/dashboard");
-  //   } catch (error) {
-  //     router.push("/login");
-  //     console.log(error.response.data);
-  //     alert(
-  //       `Your  details is ${error.response.data.error} and ${error.response.data.message} please check your details`
-  //     );
-  //   }
-  // };
-
-  // const {
-  //   values,
-  //   handleChange,
-  //   handleBlur,
-  //   handleSubmit,
-  //   errors,
-  //   touched,
-  //   isSubmitting,
-  // } = useFormik({
-  //   initialValues: {
-  //     internet_id: "",
-  //     password: "",
-  //   },
-  //   validationSchema: basicSchema,
-  //   onSubmit,
-  // });
-
   const [internetId, setinternetId] = useState("");
-  const [errorfirst, seterrorfirst] = useState(false);
+
+  const [errorlogin, setloginerror] = useState("");
+  const [errorloginstate, setloginerrorstate] = useState(false);
   const [password, setpassword] = useState("");
   const url = "https://internetid.geebee.engineer/api/v1/auth/login/";
-  // const login = async () => {
-  //   try {
-  //     const resp = await axios.post(url, {
-  //       internet_id: internetId,
-  //       password: password,
-  //     });
-  //     console.log(resp.data);
-  //   } catch (error) {
-  //     console.log(error.response.data);
-  //   }
-  // };
-  // useEffect(() => {
-  //   // redirect to home if already logged in
-  //   if (userService.userValue) {
-  //     router.push("/dashboard");
-  //   } else {
-  //     router.push("/login");
-  //   }
-  // }, []);
+
   const login = async () => {
     const data = { internet_id: internetId, password: password };
     try {
-      await userService.login(data);
+      const resp = await axios.post(url, data);
+      // await userService.login(data);
+      console.log(resp.data.data.token);
+      localStorage.setItem("user", JSON.stringify(resp.data.data.token));
       router.push("/dashboard");
     } catch (error) {
+      console.log(error.response.data.message);
+      setloginerror(error.response.data.message);
+      setloginerrorstate(true);
       router.push("/login");
     }
   };
@@ -128,7 +82,6 @@ const Login = () => {
                 type="text"
                 setstate={(e) => setinternetId(e)}
                 error="Your Internet ID must be greater than one Char."
-                errorState={errorfirst}
               />
               {/* <div className="w-full">
                 <input
@@ -154,12 +107,19 @@ const Login = () => {
                 type="password"
                 setstate={(e) => setpassword(e)}
                 error="Invalid password"
-                errorState={errorfirst}
               />
-              <div className="flex gap-2 items-center">
-                <input type="checkbox" id="remember" />
-                <label htmlFor="remember">Remember me</label>
+              <div className="flex flex-col gap-2">
+                <div className="flex gap-2 items-center">
+                  <input type="checkbox" id="remember" />
+                  <label htmlFor="remember">Remember me</label>
+                </div>
+                {errorloginstate && (
+                  <div>
+                    <p className="text-red">{errorlogin}</p>
+                  </div>
+                )}
               </div>
+
               <div className="text-left xl:mt-10">
                 <span
                   onClick={login}

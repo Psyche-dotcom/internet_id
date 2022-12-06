@@ -20,6 +20,8 @@ const Sign_up = () => {
   const [NIN, setNIN] = useState("");
   const [gender, setgender] = useState("");
   const router = useRouter();
+  const [errorsignup, setsignuperror] = useState("");
+  const [errorsignupstate, setsignuperrorstate] = useState(false);
   const url = "https://internetid.geebee.engineer/api/v1/auth/register/";
   const submitForm = async () => {
     try {
@@ -40,9 +42,10 @@ const Sign_up = () => {
       console.log(resp.data);
     } catch (error) {
       console.log(error.response.data);
-      alert(
-        `Your  details is ${error.response.data.error} and ${error.response.data.message} please check your details`
+      setsignuperror(
+        `${error.response.data.error}, ${error.response.data.message}`
       );
+      setsignuperrorstate(true);
     }
   };
 
@@ -113,7 +116,12 @@ const Sign_up = () => {
                   setstate={(e) => setcountry(e)}
                   error="Enter your country"
                 />
-
+                <Field
+                  id="Gender"
+                  placeholder="Gender"
+                  type="text"
+                  setstate={(e) => setgender(e)}
+                />
                 <div
                   onClick={() => {
                     const stepUser1 = document.querySelector("#stepUser1");
@@ -215,37 +223,39 @@ const Sign_up = () => {
                   setstate={(e) => setNIN(e)}
                   error="Invalid NIN"
                 />
-                <Field
-                  id="Gender"
-                  placeholder="Gender"
-                  type="text"
-                  setstate={(e) => setgender(e)}
-                />
-                <div className="flex gap-10 items-center">
-                  <div
-                    onClick={() => {
-                      const stepUser1 = document.querySelector("#stepUser1");
-                      const stepUser2 = document.querySelector("#stepUser2");
-                      const stepUser3 = document.querySelector("#stepUser3");
-                      stepUser1.style.display = "none";
-                      stepUser2.style.display = "flex";
-                      stepUser3.style.display = "none";
-                    }}
-                  >
-                    <span
-                      className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
-                      aria-label="Next"
+
+                <div className="flex flex-col gap-4">
+                  {errorsignupstate && (
+                    <div>
+                      <p className="text-red">{errorsignup}</p>
+                    </div>
+                  )}
+                  <div className="flex gap-10 items-center">
+                    <div
+                      onClick={() => {
+                        const stepUser1 = document.querySelector("#stepUser1");
+                        const stepUser2 = document.querySelector("#stepUser2");
+                        const stepUser3 = document.querySelector("#stepUser3");
+                        stepUser1.style.display = "none";
+                        stepUser2.style.display = "flex";
+                        stepUser3.style.display = "none";
+                      }}
                     >
-                      Back
-                    </span>
-                  </div>
-                  <div onClick={submitForm}>
-                    <span
-                      className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
-                      aria-label="Sign_up"
-                    >
-                      Create ID
-                    </span>
+                      <span
+                        className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
+                        aria-label="Next"
+                      >
+                        Back
+                      </span>
+                    </div>
+                    <div onClick={submitForm}>
+                      <span
+                        className="text-1xl text-white bg-deepBlue px-10 py-2 lg:px-6 lg:py-2 xl:px-8 xl:py-4 customBtNewe"
+                        aria-label="Sign_up"
+                      >
+                        Create ID
+                      </span>
+                    </div>
                   </div>
                 </div>
 

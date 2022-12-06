@@ -13,11 +13,8 @@ const Layout = ({ children }) => {
   const changeNavColor = () => {
     if (scrollY > 50) {
       setcustomNavBG(true);
-      console.log(scrollY);
-      console.log(true);
     } else {
       setcustomNavBG(false);
-      console.log(false);
     }
   };
 

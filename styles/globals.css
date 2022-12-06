@@ -259,3 +259,6 @@ button:disabled {
     font-size: 1.5rem;
   }
 }
+#product_step2 {
+  display: none;
+}

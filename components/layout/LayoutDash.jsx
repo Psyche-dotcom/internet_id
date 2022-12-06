@@ -13,11 +13,8 @@ const LayoutDash = ({ children, dev, logout_user }) => {
   const changeNavColor = () => {
     if (scrollY > 50) {
       setcustomNavBG(true);
-      console.log(scrollY);
-      console.log(true);
     } else {
       setcustomNavBG(false);
-      console.log(false);
     }
   };
 
